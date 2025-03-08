@@ -7,7 +7,7 @@ const int BUTTON_PINS[NUM_LEDS] = {7, 8, 9, 10, 11};
 const int GLOW_DURATION = 1000; // 1 second
 const int GAME_DURATION = 30000; // 30 seconds
 
-LiquidCrystal_I2C lcd(0x27, 16, 2); // Set the LCD address to 0x27 for a 16 chars and 2 line display
+LiquidCrystal_I2C lcd(0x27, 16, 2);
 
 int score = 0;
 int currentLED = -1;
@@ -56,12 +56,12 @@ void changeLED() {
 
 void checkButtons() {
   for (int i = 0; i < NUM_LEDS; i++) {
-    if (digitalRead(BUTTON_PINS[i]) == HIGH) {
+    if (digitalRead(BUTTON_PINS[i]) == HIGH) { // i.e button is pressed
       if (i == currentLED) {
         score++;
         changeLED();
       }
-      delay(50); // Simple debounce
+      delay(50);
     }
   }
 }
@@ -79,7 +79,7 @@ void updateLCD() {
 
 void endGame() {
   for (int i = 0; i < NUM_LEDS; i++) {
-    digitalWrite(LED_PINS[i], LOW);
+    digitalWrite(LED_PINS[i], HIGH);
   }
   
   lcd.clear();
